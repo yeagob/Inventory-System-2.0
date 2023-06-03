@@ -1,15 +1,23 @@
 #if UNITY_EDITOR
+using Prueba.Effects;
 using Prueba.Inventory;
 using UnityEditor;
 using UnityEngine;
 
-public static class ItemScriptableCreation
+public static class ScriptableCreation
 {
+    [MenuItem("Prueba/AddEffect")]
+    public static void CreateEffect()
+    {
+        EffectScriptable asset = ScriptableObject.CreateInstance<EffectScriptable>();
+        AssetDatabase.CreateAsset(asset, "Assets/Scriptable Objects/Effects/NewEffect.asset");
+        AssetDatabase.SaveAssets();
+    }
     [MenuItem("Prueba/AddItem/Resources")]
     public static void CreateResourceItem()
     {
         ResourceItemScriptable asset = ScriptableObject.CreateInstance<ResourceItemScriptable>();
-        AssetDatabase.CreateAsset(asset, "Assets/ScriptableItems/NewResourceItem.asset");
+        AssetDatabase.CreateAsset(asset, "Assets/Scriptable Objects/Items/NewResourceItem.asset");
         AssetDatabase.SaveAssets();
     }
 
@@ -17,7 +25,7 @@ public static class ItemScriptableCreation
     public static void CreateConsumableItem()
     {
         ConsumableItemScriptable asset = ScriptableObject.CreateInstance<ConsumableItemScriptable>();
-        AssetDatabase.CreateAsset(asset, "Assets/ScriptableItems/NewConsumableItem.asset");
+        AssetDatabase.CreateAsset(asset, "Assets/Scriptable Objects/Items/NewConsumableItem.asset");
         AssetDatabase.SaveAssets();
     }
 
@@ -25,7 +33,7 @@ public static class ItemScriptableCreation
     public static void CreateTrashItem()
     {
         TrashItemScriptable asset = ScriptableObject.CreateInstance<TrashItemScriptable>();
-        AssetDatabase.CreateAsset(asset, "Assets/ScriptableItems/NewTrashItem.asset");
+        AssetDatabase.CreateAsset(asset, "Assets/Scriptable Objects/Items/Trash.asset");
         AssetDatabase.SaveAssets();
     }
 
@@ -33,7 +41,7 @@ public static class ItemScriptableCreation
     public static void CreateWeaponItem()
     {
         WeaponItemScriptable asset = ScriptableObject.CreateInstance<WeaponItemScriptable>();
-        AssetDatabase.CreateAsset(asset, "Assets/ScriptableItems/NewWeaponItem.asset");
+        AssetDatabase.CreateAsset(asset, "Assets/Scriptable Objects/Items/NewWeaponItem.asset");
         AssetDatabase.SaveAssets();
     }
 }

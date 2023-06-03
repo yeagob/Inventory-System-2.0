@@ -28,7 +28,7 @@ namespace Prueba.Inventory
         {
             Dps = dps;
 			Price = price;
-            _weaponRequeriments = weaponRequeriments.itemName;
+            _weaponRequeriments = weaponRequeriments?.itemName;
         }
 
 		public void UseItem()
@@ -37,10 +37,15 @@ namespace Prueba.Inventory
 			{
 				Item item = Manager.Inventory.ItemExist(_weaponRequeriments);
 				if (item != null)
+				{
 					Manager.Inventory.DeleteItem(item);
+					Manager.UI.Popup.ShowModalMode("You attack dps: " + Dps, 1);
+				}
 				else
 					Manager.UI.Popup.ShowModalMode("Do you need " + _weaponRequeriments + " to use " + Name);
+				return;
 			}
+			Manager.UI.Popup.ShowModalMode("You attack dps: " + Dps, 1);
 		}
 
 		public void SellItem()

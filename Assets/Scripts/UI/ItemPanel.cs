@@ -13,7 +13,7 @@ namespace Prueba.UI
     {
         #region Fields
 
-        private Item _currentItem;
+        [SerializeField] private Item _currentItem;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _weigthText;
         [SerializeField] private TextMeshProUGUI _dpsText;
@@ -31,13 +31,16 @@ namespace Prueba.UI
 		#region Unity Callbacks
 		private void Start()
 		{
-            //Botton click actions, tell to InventorySystem
-            _useButton.onClick.AddListener(() => Manager.Inventory.UseItem(_currentItem));			
+            //Use / Delete / Sell Actions
+            _useButton.onClick.AddListener(() => (_currentItem as IUsable).UseItem());			
+            _sellButton.onClick.AddListener(() => (_currentItem as ISaleable).SellItem());
             _deleteButton.onClick.AddListener(() => Manager.Inventory.DeleteItem(_currentItem));
-            
-            //Listen When an item it is selected
+
+            //Listen When an item it is selected/deleted
             Manager.UI.OnItemSelected += UpdateData;
             Manager.Inventory.OnItemDeleted += ItemDeleted;
+
+            ShowElelemts(false);
         }
 
 		#endregion Unity Callbacks
@@ -47,13 +50,12 @@ namespace Prueba.UI
 		private void ItemDeleted(Item item)
 		{
 			if (item == _currentItem)
-			{
-                _currentItem = null;
                 UpdateData(_currentItem);
-			}
 		}
 		private void UpdateData(Item item)
 		{
+            _currentItem = item;
+
             if (item == null)
 			{
                 ShowElelemts(false);
@@ -69,11 +71,8 @@ namespace Prueba.UI
             if (item is Weapon weapon)
                 _dpsText.text = "DPS: \t" + weapon.Dps;
 
-            if (item is ISaleable itemSaleable)
-			{
-                _priceText.text = "Price: \t" + itemSaleable.Price;
-                _sellButton.onClick.AddListener(() => itemSaleable.SellItem());
-            }
+            if (item is ISaleable itemSaleable)		
+                _priceText.text = "Price: \t" + itemSaleable.Price;                           
 
             if (item is IDurable itemDurable)
                 _durabilityText.text = "Durability: \t" + itemDurable.Durability;

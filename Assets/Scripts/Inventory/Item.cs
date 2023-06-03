@@ -7,7 +7,7 @@ namespace Prueba.Inventory
     /// IItem base class for items definition
     /// </summary>
     [Serializable]
-    public class Item : ScriptableObject
+    public class Item 
     {
         #region Properties
         public string Name { get; private set; }

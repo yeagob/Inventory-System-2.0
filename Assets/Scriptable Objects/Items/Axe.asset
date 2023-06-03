@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: SpellBook
-  m_EditorClassIdentifier: Assembly-CSharp:Prueba.Inventory:WeaponItemScriptable
-  itemName: Spell Book
-  itemImage: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemWeight: 23
-  dps: 22
-  price: 123
+  m_Script: {fileID: 11500000, guid: 52e598d360feca441afdf99c82742451, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: 
+  itemName: Axe
+  itemImage: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
+  itemWeight: 33
+  dps: 10
+  price: 100
   weaponRequirements: {fileID: 0}

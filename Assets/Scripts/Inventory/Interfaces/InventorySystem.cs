@@ -16,10 +16,11 @@ namespace Prueba.Inventory
     /// <summary>  
     /// InventorySystem implements factory desing. Create and control IItems
     /// </summary>
+    [Serializable]
     public class InventorySystem 
     {
         #region Fields
-        private List<Item> _itemsInventory;
+        private List<Item> _itemsInventory = new List<Item>();
         [SerializeField] private float _maxWeight = 100;
         private float _currenWeight = 0;
         #endregion Fields
@@ -31,8 +32,6 @@ namespace Prueba.Inventory
         #endregion Properties
 
         #region Events / Delegates
-        public event Action<Item> OnItemUsed;		
-
 		public event Action<Item> OnItemDeleted;
        
 		#endregion Events / Delegates
@@ -65,29 +64,16 @@ namespace Prueba.Inventory
                 _itemsInventory.Add(newItem);
                 Manager.UI.CreateItemUI(newItem);
 			}
-        }
-
-		internal void CreateTrash(float weight)
-		{
-			foreach(ItemScriptable item in AvailableItems)
-            { 
-                if (item is TrashItemScriptable)
-				{
-                    item.itemWeight = weight;
-                    AddItem(item);
-				}
-            }
-		}
-
-		public void UseItem (Item item)
-		{
-            OnItemUsed?.Invoke(item);
-		}
+			else
+			{
+                Manager.UI.Popup.ShowModalMode("You cant carry more weight");
+			}
+        }		
 
         internal void ItemUpdated(Item resource)
         {
             //Refresh current selected Item
-            Manager.UI.Update();
+            Manager.UI.UpdateInfo();
         }
 
         public void DeleteItem(Item item)
@@ -95,7 +81,7 @@ namespace Prueba.Inventory
             _currenWeight -= item.Weight;
             _itemsInventory.Remove(item);
             OnItemDeleted?.Invoke(item);
-            Manager.UI.Update();
+            Manager.UI.UpdateInfo();
         }
         public Item ItemExist(string itemName)
 		{
@@ -109,7 +95,9 @@ namespace Prueba.Inventory
 
 		public void WeakItems(float durabilityLoss)
         {
-            foreach (Item item in _itemsInventory)
+            //Creates a new list to avoid destroy by weakness elements on foreach processing list
+            List<Item> itemsInventoryCopy = new List<Item>(_itemsInventory);
+            foreach (Item item in itemsInventoryCopy)
                 if (item is IDurable durableItem)
                     durableItem.Weaken(durabilityLoss);
         }

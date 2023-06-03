@@ -12,7 +12,7 @@ namespace Prueba.Inventory
     {
 		#region Fields
 
-		List<Effect> _effects;
+		List<EffectScriptable> _effects;
 
 		#endregion Fields
 
@@ -33,7 +33,7 @@ namespace Prueba.Inventory
 		#endregion Unity Callbacks
 
 		#region Public Methods
-		public Consumable(string name, Sprite image, float weight,  float durability, List<Effect> effects) : base(name, image, weight) // Call to the base constructor.
+		public Consumable(string name, Sprite image, float weight,  float durability, List<EffectScriptable> effects) : base(name, image, weight) // Call to the base constructor.
 		{
 			Durability = durability;
 			_effects = effects;
@@ -49,8 +49,13 @@ namespace Prueba.Inventory
 		public void Weaken(float durabilityReduction)
 		{
 			Durability -= durabilityReduction;
-			Durability = Mathf.Clamp(Durability, 0, 100);
-			Manager.Inventory.ItemUpdated(this);
+			if (Durability <= 0)
+			{
+				Manager.Inventory.DeleteItem(this);
+				Manager.UI.CreateTrash(Weight);
+			}
+			else
+				Manager.Inventory.ItemUpdated(this);
 		}
 		#endregion
 

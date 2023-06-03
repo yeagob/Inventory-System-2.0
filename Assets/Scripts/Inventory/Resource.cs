@@ -8,13 +8,10 @@ namespace Prueba.Inventory
     /// </summary>
     public class Resource : Item, IDurable, ISaleable
     {
+		#region Properties
 		public float Price { get ; set ; }
 		public float Durability { get; set; }
-		#region Fields
 
-		#endregion Fields
-
-		#region Properties
 		private GameManager Manager => GameManager.Instance;
 		#endregion Properties
 
@@ -37,15 +34,13 @@ namespace Prueba.Inventory
 			if (Durability <= 0)
 			{
 				Manager.Inventory.DeleteItem(this);
-				Manager.Inventory.CreateTrash(Weight);
+				Manager.UI.CreateTrash(Weight);
 			}
 			else
 				Manager.Inventory.ItemUpdated(this);
 		}
 		#endregion
 
-		#region Private Methods
-
-		#endregion
+		
 	}
 }

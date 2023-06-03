@@ -13,10 +13,4 @@ namespace Prueba.Inventory
         public float itemWeight = 0;
     }
 
-    // Para Basura
-    public class TrashItemScriptable : ItemScriptable
-    {
-        // Solo los campos de la clase base
-    }
-
 }

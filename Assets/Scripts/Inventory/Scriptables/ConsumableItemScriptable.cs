@@ -7,6 +7,6 @@ namespace Prueba.Inventory
     public class ConsumableItemScriptable : ItemScriptable
     {
         public float durability;
-        public List<Effect> effects = new List<Effect>();
+        public List<EffectScriptable> effects = new List<EffectScriptable>();
     }
 }

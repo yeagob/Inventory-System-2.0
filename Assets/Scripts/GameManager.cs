@@ -5,19 +5,19 @@ using Prueba.UI;
 namespace Prueba
 {
     /// <summary>  
-    /// GameManager implements Singleton desing 
+    /// GameManager implements Singleton desing. Have references to UIController(UI) & Inventory System(Inventory=
     /// </summary>
     public class GameManager : MonoBehaviour
     {
-        #region Fields
-        
-        #endregion Fields
-    
-        #region Properties
-        public static GameManager Instance { get; private set; }
+		#region Fields
+		private int _timeLapse = 0;
+		#endregion
+
+		#region Properties
+		//Mini singleton
+		public static GameManager Instance;
 		[field: SerializeField] public UIController UI;
 		[field: SerializeField] public InventorySystem Inventory;
-
 		#endregion Properties
 
 		#region Events / Delegates
@@ -43,11 +43,11 @@ namespace Prueba
 		}
 		#endregion Unity Callbacks
 
-
 		#region Public Methods
 		public void TimeLapse()
 		{
 			Inventory.WeakItems(1);
+			UI.Popup.ShowModalMode("Day " + (++_timeLapse), 1);
 		}
 		#endregion
 	}

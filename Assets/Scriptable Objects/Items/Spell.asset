@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Armor
+  m_Script: {fileID: 11500000, guid: 94fc346b5f340a44b8c638ed40ce93dc, type: 3}
+  m_Name: Spell
   m_EditorClassIdentifier: Assembly-CSharp:Prueba.Inventory:ResourceItemScriptable
-  itemName: Armor
-  itemImage: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
-  itemWeight: 33
-  price: 145
-  durability: 23
+  itemName: Spell
+  itemImage: {fileID: 21300000, guid: db427fab3e94daf4caa704d9314a77a1, type: 3}
+  itemWeight: 1
+  price: 100
+  durability: 3
